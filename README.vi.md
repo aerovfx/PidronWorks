@@ -82,6 +82,8 @@ Pidron cung cấp một môi trường vật lý thực tế, một hệ thống
 
 Chúng tôi đang tìm kiếm các đối tác để cùng phát triển phần cứng tùy chỉnh riêng cho ứng dụng này. Nếu bạn quan tâm đến việc hợp tác hoặc tích hợp phần cứng, vui lòng liên hệ qua email: **vietchungvn@gmail.com**.
 
-## 📜 Giấy phép
+## 📜 Bản quyền (License)
 
-Vui lòng tham khảo file `LICENSE` trong mã nguồn.
+Bản quyền © 2026 thuộc về aerovfx. Đã đăng ký bản quyền.
+
+Dự án này là mã nguồn đóng. Mọi hành vi sao chép, phân phối, chỉnh sửa hoặc sử dụng mã nguồn này mà không có sự cho phép rõ ràng bằng văn bản từ tác giả đều bị nghiêm cấm.

@@ -84,4 +84,6 @@ We are actively looking for partners to develop custom hardware specifically for
 
 ## 📜 License
 
-Please refer to the `LICENSE` file in the source code.
+Copyright © 2026 aerovfx. All Rights Reserved.
+
+This project is proprietary and closed-source. Any unauthorized copying, distribution, modification, or use of this source code is strictly prohibited without explicit written permission from the author.
