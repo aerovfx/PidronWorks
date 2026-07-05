@@ -1,82 +1,87 @@
+[English](README.md) | [Tiếng Việt](README.vi.md)
+
 # 🚁 Pidron — SITL Swarm Simulator
 
 ![Pidron Simulator Banner](asset/IMG_1592.JPG)
 
-> Pidron là một phần mềm mô phỏng bay (Software-in-the-Loop - SITL) dành cho nghiên cứu và phát triển bầy đàn máy bay không người lái (multi-UAV swarm simulator). 
+> Pidron is a Software-in-the-Loop (SITL) simulator dedicated to the research and development of multi-UAV swarms.
 
-## 🌟 Giới thiệu
+## 🌟 Introduction
 
-Pidron cung cấp một môi trường vật lý thực tế, một hệ thống autopilot dạng module, lớp điều phối bầy đàn (swarm coordination layer) và giao diện trực quan 3D trên nền tảng web. Dự án này được thiết kế chủ yếu cho mục đích nghiên cứu, mô phỏng và kiểm thử các thuật toán điều khiển UAV.
+Pidron provides a realistic physics environment, a modular autopilot system, a swarm coordination layer, and a web-based 3D visual interface. This project is primarily designed for research, simulation, and testing of UAV control algorithms.
 
-*Lưu ý: Pidron là công cụ dành cho nghiên cứu và mô phỏng. Không sử dụng để điều khiển máy bay thực tế mà không qua các bước kiểm định an toàn và thử nghiệm Hardware-in-the-Loop.*
+*Disclaimer: Pidron is intended for research and simulation purposes. Do not use it to control real aircraft without passing proper safety validations and Hardware-in-the-Loop testing.*
 
-## ✨ Tính năng chính
+## ✨ Key Features
 
-*   **Mô phỏng Vật lý (Physics Engine):** Hoạt động ở tần số 200Hz, bao gồm mô hình động cơ, lực cản không khí, nhiễu động gió và tương tác với mặt đất.
-*   **Kiến trúc uORB Bus:** Giao tiếp qua kênh pub/sub cho các module điều khiển.
-*   **Điều phối bầy đàn (Swarm Coordinator):** Xử lý toán học đội hình (như V-Formation), phân công nhiệm vụ và tránh va chạm (APF).
-*   **Giao diện Web 3D (Web UI):** Sử dụng React và Three.js để hiển thị thời gian thực UAV, quỹ đạo bay, và dữ liệu telemetry.
-*   **Mô phỏng sự cố (Fault Injection):** Hỗ trợ mô phỏng lỗi động cơ, mất GPS, hoặc nhiễu động gió để kiểm tra khả năng phục hồi của hệ thống.
-*   **Ghi và phát lại dữ liệu (Logging & Replay):** Xuất dữ liệu telemetry (định dạng JSON/rosbag-like) để xem lại và phân tích.
+*   **Physics Engine:** Runs at 200Hz, modeling motor dynamics, air drag, wind turbulence, and ground interaction.
+*   **uORB Bus Architecture:** Pub/sub communication channel for control modules.
+*   **Swarm Coordinator:** Handles formation mathematics (e.g., V-Formation), task assignment, and collision avoidance (Artificial Potential Fields).
+*   **Web 3D Interface (Web UI):** Uses React and Three.js for real-time visualization of UAVs, flight trajectories, and telemetry data.
+*   **Fault Injection:** Supports simulating engine failures, GPS loss, or wind turbulence to test system resilience.
+*   **Data Logging & Replay:** Exports telemetry data (in JSON/rosbag-like format) for post-flight review and analysis.
 
-## 🛠 Công nghệ sử dụng
+## 🛠 Technologies Used
 
-*   **Backend:** Rust (Đảm nhận mô phỏng vật lý, Flight runtime, Swarm Coordinator, WebSockets API).
+*   **Backend:** Rust (Handles physics simulation, Flight runtime, Swarm Coordinator, WebSockets API).
 *   **Frontend:** TypeScript, React, Three.js, Vite.
-*   **Giao thức:** Custom JSON WebSockets API (không dùng MAVLink ở cấu hình mặc định).
+*   **Protocol:** Custom JSON WebSockets API (MAVLink is not used by default).
 
-## 🚀 Cài đặt và Chạy thử (Quickstart)
+## 🚀 Quickstart
 
-### Yêu cầu hệ thống
-*   **Rust:** Phiên bản 1.70 trở lên (Cài đặt qua `rustup.rs`).
+### System Requirements
+*   **Rust:** Version 1.70 or higher (Install via `rustup.rs`).
 *   **Node.js & pnpm:** Node.js 18+, pnpm 8+.
 
-### Các bước thực hiện
+### Installation Steps
 
-1. **Clone repository:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourorg/pidron.git
    cd pidron
    ```
 
-2. **Khởi chạy Backend (Rust):**
-   Mở terminal 1 và chạy:
+2. **Run Backend (Rust):**
+   Open terminal 1 and run:
    ```bash
    cargo run --release
    ```
-   *Server sẽ lắng nghe tại `ws://127.0.0.1:8080`.*
+   *The server will listen at `ws://127.0.0.1:8080`.*
 
-3. **Khởi chạy Frontend (TypeScript):**
-   Mở terminal 2 và chạy:
+3. **Run Frontend (TypeScript):**
+   Open terminal 2 and run:
    ```bash
    pnpm install
    pnpm dev
    ```
 
-4. **Truy cập Giao diện:**
-   Mở trình duyệt tại địa chỉ hiển thị trên terminal (thường là `http://localhost:5174` hoặc `http://127.0.0.1:8080`).
+4. **Access the UI:**
+   Open your browser at the address shown in the terminal (usually `http://localhost:5174` or `http://127.0.0.1:8080`).
 
-## 🎮 Hướng dẫn sử dụng cơ bản
+## 🎮 Basic Usage
 
-1. Tại giao diện web, nhấn **ARM ALL** để khởi động toàn bộ UAV.
-2. Nhấn **TAKEOFF ALL**, các UAV sẽ tự động cất cánh đến độ cao lơ lửng mặc định (5m).
-3. Chọn một đội hình bay (ví dụ: `V-Formation`) ở bảng điều khiển bên dưới và nhấn **APPLY** để xem UAV di chuyển vào vị trí.
+1. In the web interface, click **ARM ALL** to arm all UAVs.
+2. Click **TAKEOFF ALL**, and all UAVs will automatically take off to the default hover altitude (5m).
+3. Select a flight formation (e.g., `V-Formation`) from the bottom control panel and click **APPLY** to see the UAVs move into position.
 
-## 📸 Giao diện và Mô phỏng (Screenshots)
+## 📸 Interface and Simulation (Screenshots)
 
 ![Screenshot 1](asset/IMG_1593.JPG)
 ![Screenshot 2](asset/IMG_1594.JPG)
 ![Screenshot 3](asset/IMG_1595.JPG)
 
-## 📚 Tài liệu tham khảo
+## 📚 Documentation
 
-Để biết thêm chi tiết về kiến trúc, cách phát triển module mới, và hướng dẫn sử dụng nâng cao, vui lòng xem trong thư mục `doc/`:
-*   [`doc/TECHNICAL.md`](doc/TECHNICAL.md) - Kiến trúc kỹ thuật và API.
-*   [`doc/TUTORIAL.md`](doc/TUTORIAL.md) - Hướng dẫn các kịch bản mô phỏng nhanh.
-*   [`doc/USER_GUIDE.md`](doc/USER_GUIDE.md) - Hướng dẫn sử dụng chi tiết UI và tính năng.
-*   [`doc/DEVELOPER_GUIDE.md`](doc/DEVELOPER_GUIDE.md) - Hướng dẫn cho lập trình viên muốn đóng góp mã nguồn.
+For more details on the architecture, module development, and advanced usage guides, please refer to the `doc/` directory:
+*   [`doc/TECHNICAL.md`](doc/TECHNICAL.md) - Technical architecture and APIs.
+*   [`doc/TUTORIAL.md`](doc/TUTORIAL.md) - Quick simulation scenario guide.
+*   [`doc/USER_GUIDE.md`](doc/USER_GUIDE.md) - Detailed usage guide for UI and features.
+*   [`doc/DEVELOPER_GUIDE.md`](doc/DEVELOPER_GUIDE.md) - Guide for developers wanting to contribute.
 
-## 📜 Giấy phép
+## 🤝 Hardware Partnership
 
-Vui lòng tham khảo file `LICENSE` trong mã nguồn.
-# PidronWorks
+We are actively looking for partners to develop custom hardware specifically for this application. If you are interested in collaboration or hardware integration, please contact us via email: **vietchungvn@gmail.com**.
+
+## 📜 License
+
+Please refer to the `LICENSE` file in the source code.
